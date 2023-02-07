@@ -20,7 +20,7 @@ const EditZone = (serial) =>
             body: JSON.stringify({
                         "zone": zone,
                         "serial": serial,
-                        "add": `{\"dname\": \"${name.replace(`.zone`,'')}\",\"ttl\": ${ttl},\"record_type\": \"CNAME\",\"line_index\": null,\"data\": [\"${value}\" ]}`
+                        "add": `{\"dname\": \"${name.replace(`.${zone}`,'')}\",\"ttl\": ${ttl},\"record_type\": \"CNAME\",\"line_index\": null,\"data\": [\"${value}\" ]}`
         }),
         headers: {
             Authorization: `cpanel ${user}:${token}`,
