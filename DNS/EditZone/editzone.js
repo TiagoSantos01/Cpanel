@@ -29,8 +29,8 @@ const EditZone = (serial) =>
         },
         method: "POST"
     }).then(ResponseSerial => ResponseSerial.json().then(ResultSerial => {
-        console.log(ResultSerial)
-        Serial = ResultSerial.errors[0].match(/([0-9])\w+/g)[0]
+        if (ResultSerial.errors != null)
+            Serial = ResultSerial.errors[0].match(/([0-9])\w+/g)[0]
     }).catch(e => core.setFailed("To transform response into json")))
     .catch(e => core.setFailed("Failed when trying to request certificate verification"))
 
@@ -46,8 +46,6 @@ const AttZone = () =>
         },
         method: "POST"
     }).then(ResponseSerial => ResponseSerial.json().then(ResultSerial => {
-        console.log(ResultSerial)
-
         core.setOutput('success', true)
 
     }).catch(e => core.setFailed("To transform response into json")))
