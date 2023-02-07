@@ -15,9 +15,14 @@ const cpanelPort = core.getInput('cpanelPort');
 const DNS_CPANEL = `${cpanelDNS}:${cpanelPort}`;
 
 let Serial = 0;
-console.log(name.split('.'))
 const EditZone = (serial) =>
-    fetch(`${DNS_CPANEL}/execute/DNS/mass_edit_zone`, {
+    console.log(JSON.stringify({
+        "zone": zone,
+        "serial": serial,
+        "add": `{\"dname\": \"${name}\",\"ttl\": ${ttl},\"record_type\": \"CNAME\",\"line_index\": null,\"data\": [\"${value}\" ]}`
+    }).split('.'))
+
+fetch(`${DNS_CPANEL}/execute/DNS/mass_edit_zone`, {
         body: JSON.stringify({
             "zone": zone,
             "serial": serial,
