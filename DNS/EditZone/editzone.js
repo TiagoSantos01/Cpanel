@@ -51,9 +51,9 @@ const execute = async() => {
             if (ResultSerial.errors != null) {
                 Serial = ResultSerial.errors[0].match(/([0-9])\w+/g)[0]
                 EditZone(Serial).then(ResponseSerial => ResponseSerial.json().then(ResultSerial => {
-                        if (ResultSerial.errors == null) {
+                        console.log(ResultSerial)
                             AttZone()
-                        }
+                        
                     }).catch(e => core.setFailed("To transform response into json")))
                     .catch(e => core.setFailed("Failed when trying to request certificate verification"))
             }
