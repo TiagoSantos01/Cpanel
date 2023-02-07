@@ -18,7 +18,7 @@ inputs:
     required: true
 runs:
   using: node16
-  main: ./checkDNS.js
+  main: ./editzone.js
 branding:
   icon: unlock
   color: gray-dark
