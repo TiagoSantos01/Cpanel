@@ -15,7 +15,7 @@ const cpanelPort = core.getInput('cpanelPort');
 const DNS_CPANEL = `${cpanelDNS}:${cpanelPort}`;
 
 let Serial = 0;
-
+console.log(btoa(name))
 const EditZone = (serial) =>
     fetch(`${DNS_CPANEL}/execute/DNS/mass_edit_zone`, {
         body: JSON.stringify({
