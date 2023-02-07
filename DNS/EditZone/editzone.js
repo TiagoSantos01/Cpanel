@@ -47,6 +47,9 @@ const AttZone = () => fetch(`${DNS_CPANEL}/execute/DNS/parse_zone`, {
     }).catch(e => core.setFailed("To transform response into json")))
     .catch(e => core.setFailed("Failed when trying to request certificate verification"))
 
-await EditZone(Serial)
-await EditZone(Serial)
-await AttZone()
+const execute = async() => {
+    await EditZone(Serial)
+    await EditZone(Serial)
+    await AttZone()
+}
+execute();
