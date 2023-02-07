@@ -16,6 +16,10 @@ inputs:
     required: true
   ttl:
     required: true
+  cpanelDNS:
+    required: true
+  cpanelPort:
+    required: true
 outputs:
   success:
     description: check if DNS has been validated 

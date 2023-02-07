@@ -8,9 +8,9 @@ const user = core.getInput('user');
 const zone = core.getInput('zone');
 const name = core.getInput('name');
 const value = core.getInput('value');
-const ttl = core.getInput('value');
-const cpanelDNS = core.getInput('value');
-const cpanelPort = core.getInput('value');
+const ttl = core.getInput('ttl');
+const cpanelDNS = core.getInput('cpanelDNS');
+const cpanelPort = core.getInput('cpanelPort');
 
 const DNS_CPANEL = `${cpanelDNS}:${cpanelPort}`;
 
