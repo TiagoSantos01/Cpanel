@@ -16,46 +16,46 @@ const DNS_CPANEL = `${cpanelDNS}:${cpanelPort}`;
 
 let Serial = 0;
 
-const EditZone = (serial) => {
+const EditZone = (serial) =>
     fetch(`${DNS_CPANEL}/execute/DNS/mass_edit_zone`, {
-            body: JSON.stringify({
-                "zone": zone,
-                "serial": serial,
-                "add": `{\"dname\": \"${name}\",\"ttl\": ${ttl},\"record_type\": \"CNAME\",\"line_index\": null,\"data\": [\"${value}\" ]}`
-            }),
-            headers: {
-                Authorization: `cpanel ${user}:${token}`,
-                'Content-Type': 'application/json'
-            },
-            method: "POST"
-        }).then(ResponseSerial => ResponseSerial.json().then(ResultSerial => {
-            console.log(ResultSerial)
-            Serial = ResultSerial.errors[0].match(/([0-9])\w+/g)[0]
-        }).catch(e => core.setFailed("To transform response into json")))
-        .catch(e => core.setFailed("Failed when trying to request certificate verification"))
-}
+        body: JSON.stringify({
+            "zone": zone,
+            "serial": serial,
+            "add": `{\"dname\": \"${name}\",\"ttl\": ${ttl},\"record_type\": \"CNAME\",\"line_index\": null,\"data\": [\"${value}\" ]}`
+        }),
+        headers: {
+            Authorization: `cpanel ${user}:${token}`,
+            'Content-Type': 'application/json'
+        },
+        method: "POST"
+    }).then(ResponseSerial => ResponseSerial.json().then(ResultSerial => {
+        console.log(ResultSerial)
+        Serial = ResultSerial.errors[0].match(/([0-9])\w+/g)[0]
+    }).catch(e => core.setFailed("To transform response into json")))
+    .catch(e => core.setFailed("Failed when trying to request certificate verification"))
 
-const AttZone = () => {
+
+const AttZone = () =>
     fetch(`${DNS_CPANEL}/execute/DNS/parse_zone`, {
-            body: JSON.stringify({
-                "zone": zone,
-            }),
-            headers: {
-                Authorization: `cpanel ${user}:${token}`,
-                'Content-Type': 'application/json'
-            },
-            method: "POST"
-        }).then(ResponseSerial => ResponseSerial.json().then(ResultSerial => {
-            console.log(ResultSerial)
+        body: JSON.stringify({
+            "zone": zone,
+        }),
+        headers: {
+            Authorization: `cpanel ${user}:${token}`,
+            'Content-Type': 'application/json'
+        },
+        method: "POST"
+    }).then(ResponseSerial => ResponseSerial.json().then(ResultSerial => {
+        console.log(ResultSerial)
 
-            core.setOutput('success', true)
+        core.setOutput('success', true)
 
-        }).catch(e => core.setFailed("To transform response into json")))
-        .catch(e => core.setFailed("Failed when trying to request certificate verification"))
-}
+    }).catch(e => core.setFailed("To transform response into json")))
+    .catch(e => core.setFailed("Failed when trying to request certificate verification"))
+
 const execute = async() => {
-    EditZone(Serial)
-    EditZone(Serial)
-    AttZone()
+    await EditZone(Serial)
+    await EditZone(Serial)
+    await AttZone()
 }
 execute();
