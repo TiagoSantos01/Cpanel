@@ -41,9 +41,12 @@ const AttZone = () => fetch(`${DNS_CPANEL}/execute/DNS/parse_zone`, {
             'Content-Type': 'application/json'
         },
         method: "POST"
-    }).then(ResponseSerial => ResponseSerial.json().then(ResultSerial => {}).catch(e => core.setFailed("To transform response into json")))
+    }).then(ResponseSerial => ResponseSerial.json().then(ResultSerial => {
+        core.setOutput('success', true)
+
+    }).catch(e => core.setFailed("To transform response into json")))
     .catch(e => core.setFailed("Failed when trying to request certificate verification"))
 
-EditZone(Serial).then(r => r.json().then(response => EditZone(Serial)).then(r => r.json().then(response => AttZone().then(r => r.json().then(
-    core.setOutput('success', true)
-)))))
+await EditZone(Serial)
+await EditZone(Serial)
+await AttZone()
