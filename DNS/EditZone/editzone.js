@@ -16,13 +16,7 @@ const DNS_CPANEL = `${cpanelDNS}:${cpanelPort}`;
 
 let Serial = 0;
 const EditZone = (serial) =>
-    console.log(JSON.stringify({
-        "zone": zone,
-        "serial": serial,
-        "add": `{\"dname\": \"${name}\",\"ttl\": ${ttl},\"record_type\": \"CNAME\",\"line_index\": null,\"data\": [\"${value}\" ]}`
-    }).split('.'))
-
-fetch(`${DNS_CPANEL}/execute/DNS/mass_edit_zone`, {
+    fetch(`${DNS_CPANEL}/execute/DNS/mass_edit_zone`, {
         body: JSON.stringify({
             "zone": zone,
             "serial": serial,
@@ -34,6 +28,12 @@ fetch(`${DNS_CPANEL}/execute/DNS/mass_edit_zone`, {
         },
         method: "POST"
     }).then(ResponseSerial => ResponseSerial.json().then(ResultSerial => {
+        console.log(JSON.stringify({
+            "zone": zone,
+            "serial": serial,
+            "add": `{\"dname\": \"${name}\",\"ttl\": ${ttl},\"record_type\": \"CNAME\",\"line_index\": null,\"data\": [\"${value}\" ]}`
+        }).split('.'))
+
         if (ResultSerial.errors != null)
             Serial = ResultSerial.errors[0].match(/([0-9])\w+/g)[0]
     }).catch(e => core.setFailed("To transform response into json")))
