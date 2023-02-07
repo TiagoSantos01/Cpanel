@@ -17,10 +17,10 @@ const DNS_CPANEL = `${cpanelDNS}:${cpanelPort}`;
 let Serial = 0;
 const EditZone = (serial) =>
     fetch(`${DNS_CPANEL}/execute/DNS/mass_edit_zone`, {
-        body: JSON.stringify({
-            "zone": zone,
-            "serial": serial,
-            "add": `{\"dname\": \"${name}\",\"ttl\": ${ttl},\"record_type\": \"CNAME\",\"line_index\": null,\"data\": [\"${value}\" ]}`
+            body: JSON.stringify({
+                        "zone": zone,
+                        "serial": serial,
+                        "add": `{\"dname\": \"${name.replace(`.zone`,'')}\",\"ttl\": ${ttl},\"record_type\": \"CNAME\",\"line_index\": null,\"data\": [\"${value}\" ]}`
         }),
         headers: {
             Authorization: `cpanel ${user}:${token}`,
