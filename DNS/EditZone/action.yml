@@ -16,9 +16,12 @@ inputs:
     required: true
   ttl:
     required: true
+outputs:
+  success:
+    description: check if DNS has been validated 
 runs:
   using: node16
-  main: ./editzone.js
+  main: ./checkDNS.js
 branding:
   icon: unlock
   color: gray-dark
