@@ -21,7 +21,7 @@ outputs:
     description: check if DNS has been validated 
 runs:
   using: node16
-  main: ./checkDNS.js
+  main: ./editzone.js
 branding:
   icon: unlock
   color: gray-dark
